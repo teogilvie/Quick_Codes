@@ -1,4 +1,6 @@
 #use bracketed system to determine taxes to be paid
+#current brackets are for puerto rico
+#adjust and add/subtract for your local tax codes
 
 import math
 
@@ -17,26 +19,26 @@ class Bracket:
         bracket4 = Bracket(41500, 61500, 0.25)
         bracket5 = Bracket(61500, math.inf, 0.33)
 
-        brackets = [bracket1, bracket2, bracket3, bracket4, bracket5]
-        tax_paid =0
+        brackets = [bracket5, bracket4, bracket3, bracket2, bracket1]
+        tax_paid = 0
 
         for bracket in brackets:
-            if salary > bracket.ul:
+            if bracket.ll < salary <= bracket.ul:
+                tax_paid += (salary - bracket.ll) * bracket.rate
+            elif salary > bracket.ul:
                 tax_paid += (bracket.ul - bracket.ll) * bracket.rate
-                salary -= (bracket.ul - bracket.ll)
-            else:
-                tax_paid += (salary-bracket.ll) * bracket.rate
-                break
+
         return tax_paid
 
-salary = 45000
-taxes = format(Bracket(0,0,0).tax_paid(salary), '.2f')
-leftover = format(salary - float(taxes), '.2f')
-monthly = format(float(leftover)/12, '.2f')
-weekly = format(float(monthly)/4, '.2f')
+salary = 85000
+bracket = Bracket(0,0,0)
+taxes = bracket.tax_paid(salary)
+leftover = salary - taxes
+monthly = leftover/12
+weekly = monthly/4
 
-print(f'''\nYou will pay ${taxes} in taxes \n 
-this will leave you with ${leftover} annually \n
-which is ${monthly} per month or ${weekly} per week \n''')
+print(f'''\nYou will pay ${taxes: .2f} in taxes \n 
+this will leave you with ${leftover: .2f} annually \n
+which is ${monthly: .2f} per month or ${weekly: .2f} per week \n''')
 
 
