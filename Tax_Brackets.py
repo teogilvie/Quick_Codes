@@ -30,6 +30,7 @@ class Bracket:
 
         return tax_paid
 
+'''
 salary = 45000
 bracket = Bracket(0,0,0)
 taxes = bracket.tax_paid(salary)
@@ -37,10 +38,10 @@ percent = (taxes/salary)*100
 leftover = salary - taxes
 monthly = leftover/12
 weekly = monthly/4
-
-print(f'''\nYou will pay ${taxes: .2f} in taxes \n
-this is {percent: .2f}% of your total salary\n 
-this will leave you with ${leftover: .2f} annually \n
-which is ${monthly: .2f} per month or ${weekly: .2f} per week \n''')
+'''
+#print(f'''\nYou will pay ${taxes: .2f} in taxes \n
+#this is {percent: .2f}% of your total salary\n 
+#this will leave you with ${leftover: .2f} annually \n
+#which is ${monthly: .2f} per month or ${weekly: .2f} per week \n''')
 
 
